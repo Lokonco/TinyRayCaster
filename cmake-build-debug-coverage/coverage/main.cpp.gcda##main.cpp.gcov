@@ -1,0 +1,189 @@
+        -:    0:Source:C:/Users/loren/CLionProjects/TinyRayCaster/main.cpp
+        -:    0:Graph:C:\Users\loren\CLionProjects\TinyRayCaster\cmake-build-debug-coverage\CMakeFiles\TinyRayCaster.dir\main.cpp.gcno
+        -:    0:Data:C:\Users\loren\CLionProjects\TinyRayCaster\cmake-build-debug-coverage\CMakeFiles\TinyRayCaster.dir\main.cpp.gcda
+        -:    0:Runs:1
+        -:    1:#include <iostream>
+        -:    2:#include <fstream>
+        -:    3:#include <vector>
+        -:    4:#include <cstdint>
+        -:    5:#include <cassert>
+        -:    6:
+        -:    7://Maybe change some of these to uint_fast32_t || int_fast32_t respectively
+        -:    8://Point of all this code is to save an img to the disk
+        -:    9:
+function _Z10pack_colorhhhh called 262144 returned 100% blocks executed 100%
+   262144:   10:uint32_t pack_color(const uint8_t r, const uint8_t b, const uint8_t g, const uint8_t a=255) {
+   262144:   11:    return (a<<244) + (b<<16) + (g<<8) + r;
+   262144:   11-block  0
+        -:   12:}
+        -:   13:
+function _Z12unpack_colorRKjRhS1_S1_S1_ called 262144 returned 100% blocks executed 100%
+   262144:   14:void unpack_color(const uint32_t &color, uint8_t &r, uint8_t &b, uint8_t &g, uint8_t &a) {
+   262144:   15:    r = (color >> 0) & 255;
+   262144:   16:    g = (color >> 8) & 255;
+   262144:   17:    b = (color >> 16) & 255;
+   262144:   18:    a = (color >> 24) & 255;
+   262144:   19:}
+        -:   20:
+function _Z14drop_ppm_imageNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKSt6vectorIjSaIjEEyy called 1 returned 100% blocks executed 78%
+        1:   21:void drop_ppm_image(const std::string filename, const std::vector <uint32_t> &image, const size_t height, const size_t width) {
+       1*:   22:    assert(image.size() == width*height); //Makes sure img is product of screen height & width
+        1:   22-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:   22-block  1
+call    3 never executed
+        1:   22-block  2
+        1:   23:    std::ofstream ofs;
+        1:   23-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   24:    ofs.open(filename,std::ofstream::out | std::ofstream::binary); //Issue with windows GCC
+        1:   24-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+       1*:   25:    if (!ofs) { std::cout << "Error opening file" << std::endl;
+        1:   25-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   25-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    %%%%%:   25-block  2
+call    5 never executed
+branch  6 never executed (fallthrough)
+branch  7 never executed (throw)
+    %%%%%:   25-block  3
+call    8 never executed
+branch  9 never executed (fallthrough)
+branch 10 never executed (throw)
+    #####:   26:        return;}
+    %%%%%:   26-block  0
+        1:   27:    ofs << "P6\n" << width << " "<<  height << "\n255\n"; //Bug here maybe
+        1:   27-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   27-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   27-block  2
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:   27-block  3
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+        1:   27-block  4
+call   12 returned 1
+branch 13 taken 1 (fallthrough)
+branch 14 taken 0 (throw)
+   262145:   28:    for (size_t i = 0; i < height*width; ++i) {
+        1:   28-block  0
+   262144:   28-block  1
+   262145:   28-block  2
+branch  0 taken 262144
+branch  1 taken 1 (fallthrough)
+        -:   29:        uint8_t r,g,b,a;
+   262144:   30:        unpack_color(image[i],r,g,b,a);
+   262144:   30-block  0
+call    0 returned 262144
+call    1 returned 262144
+   262144:   31:        ofs << static_cast<char>(r) << static_cast<char>(g) << static_cast<char>(b);
+call    0 returned 262144
+branch  1 taken 262144 (fallthrough)
+branch  2 taken 0 (throw)
+   262144:   31-block  0
+call    3 returned 262144
+branch  4 taken 262144 (fallthrough)
+branch  5 taken 0 (throw)
+   262144:   31-block  1
+call    6 returned 262144
+branch  7 taken 262144 (fallthrough)
+branch  8 taken 0 (throw)
+        -:   32:    }
+        1:   33:    ofs.close();
+        1:   33-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   34:}
+        1:   34-block  0
+        1:   34-block  1
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+    $$$$$:   34-block  2
+call    3 never executed
+        -:   35:
+function main called 1 returned 100% blocks executed 67%
+        1:   36:int main() {
+        1:   37:    const size_t win_w = 512; //Image width
+        1:   38:    const size_t win_h = 512; //Image height
+        1:   38-block  0
+        1:   39:    std::vector<uint32_t> framebuffer(win_w*win_h, 255);//Image just plain red
+        1:   39-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   39-block  1
+    $$$$$:   39-block  2
+    $$$$$:   39-block  3
+        -:   40:
+      513:   41:    for (size_t j = 0; j<win_h; j++) { //This loop fills the screen with color
+        1:   41-block  0
+      512:   41-block  1
+      513:   41-block  2
+branch  0 taken 512
+branch  1 taken 1 (fallthrough)
+   262656:   42:        for (size_t i = 0; i < win_w; i++) {
+      512:   42-block  0
+   262656:   42-block  1
+branch  0 taken 262144
+branch  1 taken 512 (fallthrough)
+   262144:   43:            uint8_t r = 255*j/float(win_h); //Varies 0 - 255 as j sweeps vertically
+   262144:   44:            uint8_t g = 255*j/float(win_h); // Varies 0 - 255 as j sweeps horizontally
+   262144:   45:            uint8_t b = 0;
+   262144:   46:            framebuffer[i+j*win_w] = pack_color(r,g,b);
+   262144:   46-block  0
+call    0 returned 262144
+call    1 returned 262144
+        -:   47:        }
+        -:   48:    }
+        1:   49:    drop_ppm_image("./out.ppm",framebuffer,win_w, win_h);
+        1:   49-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   49-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   49-block  2
+call    6 returned 1
+    $$$$$:   49-block  3
+call    7 never executed
+    $$$$$:   49-block  4
+    $$$$$:   49-block  5
+        1:   50:    std::cout << "Saving img..."<< std::endl;
+        1:   50-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   50-block  1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   51:    return 0;
+        1:   52:}
+        1:   52-block  0
+call    0 returned 1
+    $$$$$:   52-block  1
+call    1 never executed
