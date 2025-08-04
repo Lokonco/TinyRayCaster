@@ -48,14 +48,17 @@ void draw_rectangle(std::vector<uint32_t> &img, const size_t img_w, const size_t
     }
 }
 
+
+
 int main() {
     const size_t win_w = 512; //Image width
     const size_t win_h = 512; //Image height
-    std::vector<uint32_t> framebuffer(win_w*win_h, 255);//Image just plain red
+    std::vector<uint32_t> framebuffer(win_w*win_h, 255);//Image just plain white
 
     //------------Map------------//
-    const size_t map_w = 16;
-    const size_t map_h = 16;
+    const size_t map_w = 16; //Width
+    const size_t map_h = 16; //Height
+                //Actual Map
     const char map[] = "0000222222220000"\
                    "1              0"\
                    "1      11111   0"\
@@ -72,7 +75,11 @@ int main() {
                    "0 0000000      0"\
                    "0              0"\
                    "0002222222200000";
-    assert(sizeof(map) == map_w*map_h+1);
+    assert(sizeof(map) == map_w*map_h+1); //+1 for null terminated string
+
+    //Player position variables
+    float player_x = 3.456;
+    float player_y = 2.456;
 
     for (size_t j = 0; j < win_h; j++) { //This loop fills the screen with color
         for (size_t i = 0; i < win_w; i++) {
@@ -92,10 +99,11 @@ int main() {
             size_t rect_x = i*rect_w;
             size_t rect_y = j*rect_h;
             draw_rectangle(framebuffer, win_w, win_h, rect_x, rect_y, rect_w, rect_h,pack_color(0, 255, 255));
+            draw_rectangle(framebuffer, win_w, win_h, player_x*rect_w, player_y*rect_h, 5, 5, pack_color(255,255,255)); //Draw player
         }
     }
     //-----------------------------//
-    
+
 
     drop_ppm_image("./image.ppm",framebuffer,win_w, win_h);
     return 0;
