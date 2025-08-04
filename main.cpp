@@ -3,9 +3,8 @@
 #include <vector>
 #include <cstdint>
 #include <cassert>
+#include <cmath>
 
-//Maybe change some of these to uint_fast32_t || int_fast32_t respectively
-//Point of all this code is to save an img to the disk
 
 uint32_t pack_color(const uint8_t r, const uint8_t b, const uint8_t g, const uint8_t a=255) {
     return (a<<24) + (b<<16) + (g<<8) + r;
@@ -58,7 +57,7 @@ int main() {
     //------------Map------------//
     const size_t map_w = 16; //Width
     const size_t map_h = 16; //Height
-                //Actual Map
+        //-----Actual Map-----//
     const char map[] = "0000222222220000"\
                    "1              0"\
                    "1      11111   0"\
@@ -80,6 +79,7 @@ int main() {
     //Player position variables
     float player_x = 3.456;
     float player_y = 2.456;
+    float player_a = 1.523; // view direction
 
     for (size_t j = 0; j < win_h; j++) { //This loop fills the screen with color
         for (size_t i = 0; i < win_w; i++) {
@@ -103,6 +103,18 @@ int main() {
         }
     }
     //-----------------------------//
+
+    //First ray cast used to get distance from player and obj
+    // SOMETHING IS GOING ON HEREEEEEEE ????
+    for (int t = 0; t < 20; t+=.05) { // 20 used because of map being 16x16
+        float cx = player_x + t*std::cos(player_a);
+        float cy = player_y + t*std::cos(player_a);
+        if (map[int(cx)+int(cy)*map_w]!=' ') break;
+
+        size_t pix_x = cx*rect_w;
+        size_t pix_y = cy*rect_h;
+        framebuffer[pix_x + pix_y*win_w] = pack_color(255,255,255);
+    }
 
 
     drop_ppm_image("./image.ppm",framebuffer,win_w, win_h);
