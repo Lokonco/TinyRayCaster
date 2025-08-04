@@ -1,3 +1,0 @@
-C:/Users/loren/CLionProjects/TinyRayCaster/cmake-build-debug-coverage/CMakeFiles/TinyRayCaster.dir
-C:/Users/loren/CLionProjects/TinyRayCaster/cmake-build-debug-coverage/CMakeFiles/edit_cache.dir
-C:/Users/loren/CLionProjects/TinyRayCaster/cmake-build-debug-coverage/CMakeFiles/rebuild_cache.dir
