@@ -95,7 +95,7 @@ int main() {
         }
     }
     //-----------------------------//
-    int i = 0;
+    
 
     drop_ppm_image("./image.ppm",framebuffer,win_w, win_h);
     return 0;
